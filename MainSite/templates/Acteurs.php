@@ -33,17 +33,17 @@ $SQLQueryDeleteLike->execute(); }
 
 //Sinon ajoute un like ayant comme valeur 1 dans la table ET supprime l'entrée dislike si existant. (Ne fonctionne pas)
 elseif ($checklike->rowCount() == -1) {
-	$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur AND vote = -1');
-	$SQLQueryDeleteLike->bindParam(':id_user', $userid);
-	$SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
-	$SQLQueryDeleteLike->execute();
+// 	$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur AND vote = -1');
+// 	$SQLQueryDeleteLike->bindParam(':id_user', $userid);
+// 	$SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
+// 	$SQLQueryDeleteLike->execute();
 
 
-$SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
-$SQLQueryLike->bindParam(':id_user', $userid);
-$SQLQueryLike->bindParam(':id_acteur', $acteurid);
-$SQLQueryLike->bindParam(':vote', $like);
-$SQLQueryLike->execute();
+// $SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
+// $SQLQueryLike->bindParam(':id_user', $userid);
+// $SQLQueryLike->bindParam(':id_acteur', $acteurid);
+// $SQLQueryLike->bindParam(':vote', $like);
+// $SQLQueryLike->execute();
 }
 //Sinon ajoute un like/1 
 else {
