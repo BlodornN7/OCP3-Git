@@ -54,7 +54,7 @@ else { echo ' <section id="Connexionsection">
       <label for="username">Nom d\'utilisateur:</label><br>
       <input type="text" id="username" name="username"><br>
       <label for="password">Mot de passe:</label><br>
-      <input type="text" id="password" name="password"><br><br>
+      <input type="password" id="password" name="password"><br><br>
       <input type="submit" value="Se connecter"> </form><br>
       <button><a href="Passwordreset.php">Mot de passe oublié</button>
       

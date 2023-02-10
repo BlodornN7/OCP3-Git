@@ -21,7 +21,7 @@
       <label for="UserName">Nom d'utilisateur</label><br>
       <input type="text" id="UserName" name="UserName"><br>
       <label for="Password">Mot de passe</label><br>
-      <input type="text" id="Password" name="Password"><br>
+      <input type="password" id="Password" name="Password"><br>
       <label for="SecretQuestion">Question secrète</label><br>
       <input type="text" id="SecretQuestion" name="SecretQuestion"><br>
       <label for="SecretAnswer">Réponse à la question secrète</label><br>

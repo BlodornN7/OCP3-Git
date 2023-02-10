@@ -1,11 +1,11 @@
-<?php // Beginning of SQL Queries
+<?php //Beginning of SQL Queries
       error_reporting(0); //ignore les erreurs non pertinentes
 
-?>
 
 
 
-<?php // Si une requète de type POST contenant le terme 'like' est reçue alors ...	
+
+ // Si une requète de type POST contenant le terme 'like' est reçue alors ...	
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['like']))  {
 
 
@@ -28,23 +28,6 @@ $SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
 $SQLQueryDeleteLike->execute(); } 
 
 
-
-
-
-//Sinon ajoute un like ayant comme valeur 1 dans la table ET supprime l'entrée dislike si existant. (Ne fonctionne pas)
-elseif ($checklike->rowCount() == -1) {
-// 	$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur AND vote = -1');
-// 	$SQLQueryDeleteLike->bindParam(':id_user', $userid);
-// 	$SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
-// 	$SQLQueryDeleteLike->execute();
-
-
-// $SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
-// $SQLQueryLike->bindParam(':id_user', $userid);
-// $SQLQueryLike->bindParam(':id_acteur', $acteurid);
-// $SQLQueryLike->bindParam(':vote', $like);
-// $SQLQueryLike->execute();
-}
 //Sinon ajoute un like/1 
 else {
 	$SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
@@ -83,6 +66,24 @@ $SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AN
 	$SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
 	$SQLQueryDeleteLike->execute(); } 
 }
+// Fait la liaison entre la table user et vote et en fait un tableau
+$SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN post ON users_new.id_user=post.id_user WHERE id_acteur = :id_acteur ORDER BY date_add DESC' ;
+	    $testliaisontable = $db->prepare($SqlQuery1);
+	    $testliaisontable->bindParam(':id_acteur', $Acteurs['id_acteur']);
+	    $testliaisontable->execute();
+	    $result = $testliaisontable->FetchAll();
+
+		$idacteur = $Acteurs['id_acteur'];
+		$getlikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = 1');
+		$getlikesum->bindParam(':id_acteur', $idacteur);
+		$getlikesum->execute();
+		$resultlike = $getlikesum->FetchAll();
+	   
+		
+		$getdislikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = -1');
+		$getdislikesum->bindParam(':id_acteur', $idacteur);
+		$getdislikesum->execute();
+		$resultdislike = $getdislikesum->FetchAll();
 
 
 // End of SQL Queries 
@@ -110,21 +111,20 @@ $SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AN
  <input type="hidden" name="id_acteur" value="<?=$Acteurs['id_acteur'];?>"><br><br>
  <input type="submit" name="like" value="1">
  <input type="submit" name="dislike" value="-1">
+
+ <script>
+ document.getElementById("like-button").value = "Like";
+ document.getElementById("dislike-button").value = "Dislike";
+</script>
   
  <?php //Prends le nombre de like/dislike et en fait un total puis l'affiche
- $idacteur = $Acteurs['id_acteur'];
- $getlikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = 1');
- $getlikesum->bindParam(':id_acteur', $idacteur);
- $getlikesum->execute();
- $resultlike = $getlikesum->FetchAll();
-
- 
- $getdislikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = -1');
- $getdislikesum->bindParam(':id_acteur', $idacteur);
- $getdislikesum->execute();
- $resultdislike = $getdislikesum->FetchAll();
-       echo '<p>Like ='.$resultlike[0]['total_rows'].'</p>';
+       if($resultlike[0]['total_rows'] == 0 && $resultdislike[0]['total_rows'] == 0) {
+		echo "Il n'y aucun like ou dislike sur cet acteur";
+	   }
+	   else {
+       echo '<p>like ='.$resultlike[0]['total_rows'].'</p>'; 
 	   echo '<p>Dislike ='.$resultdislike[0]['total_rows'].'</p>'; 
+	   }
     ?>
   
   
@@ -159,6 +159,7 @@ $SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AN
 		'date_add' => $date,
 		]);
 		Echo 'Merci, '.$_SESSION["surname"].'. Votre commentaire a bien été ajouté.';
+		header("Refresh:2");
 			
 	}
 
@@ -188,11 +189,7 @@ $SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AN
 		
 
     <?php 
-	    $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN post ON users_new.id_user=post.id_user WHERE id_acteur = :id_acteur ORDER BY date_add DESC' ;
-	    $testliaisontable = $db->prepare($SqlQuery1);
-	    $testliaisontable->bindParam(':id_acteur', $Acteurs['id_acteur']);
-	    $testliaisontable->execute();
-	    $result = $testliaisontable->FetchAll();
+	    
 	    foreach ($result as $test) { ?>
 		<div class="CommentSection">
 	<p> Auteur : <?= $test['prenom']; ?> </p>

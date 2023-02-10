@@ -34,7 +34,7 @@ if ($_SESSION['logged_in'] !== true) {
       
 <form action="ValidateAccountModification.php" method="POST">      
 <label for="Password">Mot de passe :</label><br>
-      <input type="text" id="Password" name="Password" value="******"><br><br>
+      <input type="password" id="Password" name="Password" value="<?=$_SESSION["password"];?>"><br><br>
       <input type="submit" value="Modifier mon mot de passe"><br><br> </form>
             
 <form action="ValidateAccountModification.php" method="POST">

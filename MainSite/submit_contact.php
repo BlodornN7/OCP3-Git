@@ -28,11 +28,7 @@ $CheckUsernameAvailableSQL = $db->prepare("SELECT * FROM users_new WHERE usernam
 $CheckUsernameAvailableSQL->bindParam(':username', $username);
 $CheckUsernameAvailableSQL->execute();
 $user1 = $CheckUsernameAvailableSQL->fetch();
-//Demande à SQL de vérifier si le nom complet est déjà utilisé
-//$CheckFullNameAvailableSQL = $db->prepare("SELECT * FROM users_new WHERE full_name = :fullname");
-//$CheckFullNameAvailableSQL->bindParam(':fullname', $fullname);
-//$CheckFullNameAvailableSQL->execute();
-//$user2 = $CheckFullNameAvailableSQL->fetch();
+
 if ($user1) {
     echo "Le nom d'utilisateur n'est pas disponible";
     exit(); // ce code stoppe le script
@@ -56,7 +52,7 @@ $insertUser->execute([
 'reponse' => $secretanswer,
 
 ]);
-header('location: Connexionpage.php');}
+header('location: login.php');}
 
 ?>
 
