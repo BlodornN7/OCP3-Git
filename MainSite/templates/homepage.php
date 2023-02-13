@@ -16,12 +16,12 @@
 	
 <div class="h1">
 
-    <p>Le GBAF est le représentant de la profession bancaire et des assureurs sur tous
-les axes de la réglementation financière française. Sa mission est de promouvoir
-l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des
-pouvoirs publics.</p>
+    <h1 id="presentation_text">Le GBAF (Groupement Banque Assurance Français) est une fédération qui représente les six plus grandes banques et assurances françaises :
+		 BNP Paribas, BPCE, Crédit Agricole, Crédit Mutuel-CIC, Société Générale, et La Banque Postale. 
+		 Le GBAF a pour mission de promouvoir l'industrie bancaire et d'assurance en France et de jouer un rôle de représentant de la profession 
+		 auprès des autorités publiques en matière de réglementation financière. Le GBAF gère près de 80 millions de comptes dans le pays.</h1>
     <div id="illustrationbox">
-    <img id="illustration" src="images/logo.png">
+    <img id="illustration" src="images/illustration_bank.jpg">
     </div>
     
 
@@ -30,8 +30,7 @@ pouvoirs publics.</p>
 
 <div> 
 
-	<h2>Texte acteurs & partenaires</h2>
-	<p>Présentation lorem ipsum dksjfdlfskfhjdsklfhsjfdklshjdskfshdjk</p>
+	<h2>Vous trouverez ci-dessous la liste des acteurs partenaires du GBAF</h2>
 
 </div>
 

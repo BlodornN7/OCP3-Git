@@ -107,28 +107,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 	</div>
 <?= $Acteurs['description']; ?>
 
-<form method="post">
- <input type="hidden" name="id_acteur" value="<?=$Acteurs['id_acteur'];?>"><br><br>
- <input type="submit" name="like" value="1">
- <input type="submit" name="dislike" value="-1">
 
- <script>
- document.getElementById("like-button").value = "Like";
- document.getElementById("dislike-button").value = "Dislike";
-</script>
-  
- <?php //Prends le nombre de like/dislike et en fait un total puis l'affiche
-       if($resultlike[0]['total_rows'] == 0 && $resultdislike[0]['total_rows'] == 0) {
-		echo "Il n'y aucun like ou dislike sur cet acteur";
-	   }
-	   else {
-       echo '<p>like ='.$resultlike[0]['total_rows'].'</p>'; 
-	   echo '<p>Dislike ='.$resultdislike[0]['total_rows'].'</p>'; 
-	   }
-    ?>
-  
-  
-</form>
 
 </section>
 
@@ -140,7 +119,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 	
 
 	
-
+	<div id="CommentLikeDisplay">
 	<?php // Si php détecte la publication de la publication, il remerci l'utilisateur et confirme le post
 	     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Post']))  {
 		 
@@ -170,7 +149,22 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
         <input type="hidden" name="form-state" value="hidden">
         </form>
 	   <?php } ?>
-	
+	   
+	   <?php //Prends le nombre de like/dislike et en fait un total puis l'affiche
+		if($resultlike[0]['total_rows'] == 0 && $resultdislike[0]['total_rows'] == 0) { ?>
+		  <p> Il n'y aucun like ou dislike sur cet acteur </p>
+		<?php }
+		 else {
+		echo ''.$resultlike[0]['total_rows'].' personnes ont recommandé cet acteur et '.$resultdislike[0]['total_rows'].' personnes ne le recommande pas'; 
+		} ?>
+
+<form id="LikeDislikePost" method="post">
+ <input type="hidden" name="id_acteur" value="<?=$Acteurs['id_acteur'];?>"><br><br>
+ <input type="submit" name="like" value="1">
+ <input type="submit" name="dislike" value="-1">
+</form>
+
+
 	<?php // Si l'utilisateur clique sur le bouton, alors il affiche le champs pour remplir son commentaire et le soumettre 
 	    if(isset($_POST['show-form-button']))
 	{
@@ -182,14 +176,16 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
   <textarea id="Post" name="Post" rows="5" cols="80"></textarea><br>
   <input type="submit" value="Publier mon commentaire"><br> </form>
 <?php } ?>
-
+		</div>
 
 
         
-		
+
 
     <?php 
 	    
+	 
+
 	    foreach ($result as $test) { ?>
 		<div class="CommentSection">
 	<p> Auteur : <?= $test['prenom']; ?> </p>
@@ -199,7 +195,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 	</div>
 	<?php } ?>
 
-
+	</section>
 	
 
 
@@ -209,7 +205,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 
 
 
-</section>
+
 
 <?php include_once('footer.php'); ?>
 
