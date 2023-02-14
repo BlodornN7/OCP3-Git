@@ -75,11 +75,13 @@ word-break: break-all;
 	border-radius: 5px;
 }
 
-#LikeDislike {
-	position: relative;
-	left: 1725px;
-	bottom: 50px;
-	border-radius: 5px;
+#LikeDislikePost {
+	display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 26px;
+    bottom: 68px;
+	align-items: baseline;
 }
 
 
@@ -109,6 +111,24 @@ word-break: break-all;
     padding-right: 5px;
 }
 
+#CommentDisplay {
+	display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 20px;
+    bottom: 25px;
+}
+
+#LikeNonePrompt, #LikeDislikePrompt {
+	display: flex;
+    justify-content: flex-end;
+    position: relative;
+	
+}
+
+.image {
+	width: 60%;
+}
 
 
 @media screen and (max-width: 391px) {

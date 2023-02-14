@@ -47,8 +47,9 @@
 
 		<div class="frame">
 		    <img class="image" src="<?=$Acteurs['logo'];?>">
-			 <h3> <?=$Acteurs['acteur'];?></h3>
-			 <p><?= $texte_coupe . "..."; ?></p>
+			
+			 <h3> <?=$Acteurs['acteur'];?></h3><br></br>
+			 <p style="font-size: 17px"><?= $texte_coupe . "..."; ?></p>
 			 
 			 
 			 <div class="border">

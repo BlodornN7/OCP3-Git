@@ -103,9 +103,9 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 
 <section id="sectionacteur1">
 	<div class="logoacteurdiv" >
-	<h1><img class="image" src="<?=$Acteurs['logo'];?>"></h1>
-	</div>
-<?= $Acteurs['description']; ?>
+	<img class="image" src="<?=$Acteurs['logo'];?>">
+	</div> <br></br>
+<b> <?= $Acteurs['description']; ?> </b>
 
 
 
@@ -120,6 +120,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 
 	
 	<div id="CommentLikeDisplay">
+		<div id="CommentDisplay">
 	<?php // Si php détecte la publication de la publication, il remerci l'utilisateur et confirme le post
 	     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Post']))  {
 		 
@@ -149,13 +150,13 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
         <input type="hidden" name="form-state" value="hidden">
         </form>
 	   <?php } ?>
-	   
+		</div>
 	   <?php //Prends le nombre de like/dislike et en fait un total puis l'affiche
 		if($resultlike[0]['total_rows'] == 0 && $resultdislike[0]['total_rows'] == 0) { ?>
-		  <p> Il n'y aucun like ou dislike sur cet acteur </p>
+		  <p id="LikeNonePrompt"> Il n'y aucun like ou dislike sur cet acteur </p>
 		<?php }
 		 else {
-		echo ''.$resultlike[0]['total_rows'].' personnes ont recommandé cet acteur et '.$resultdislike[0]['total_rows'].' personnes ne le recommande pas'; 
+		echo '<p id="LikeDislikePrompt">'.$resultlike[0]['total_rows'].' personnes ont recommandé cet acteur et '.$resultdislike[0]['total_rows'].' personnes ne le recommande pas</p>'; 
 		} ?>
 
 <form id="LikeDislikePost" method="post">
