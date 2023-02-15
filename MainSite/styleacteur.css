@@ -123,6 +123,7 @@ word-break: break-all;
 	display: flex;
     justify-content: flex-end;
     position: relative;
+	top: 10px;
 	
 }
 
@@ -130,6 +131,13 @@ word-break: break-all;
 	width: 60%;
 }
 
+.LikeDislikebutton {
+	height: 30px;
+}
+
+#ActorDescription {
+	font-size: 22px;
+}
 
 @media screen and (max-width: 391px) {
 
