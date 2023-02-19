@@ -11,7 +11,7 @@ catch (Exception $e)
 
 if ($_POST['Name']) {
     $nom = $_POST['Name'];
-$ModifyAccountInfoSQL = $db->prepare('UPDATE users_new SET nom = :nom WHERE id_user = :id_user');
+$ModifyAccountInfoSQL = $db->prepare('UPDATE users SET nom = :nom WHERE id_user = :id_user');
 $ModifyAccountInfoSQL->bindParam(':id_user', $_SESSION['user_id']);
 $ModifyAccountInfoSQL->bindParam(':nom', $nom);
 $ModifyAccountInfoSQL->execute();
@@ -23,7 +23,7 @@ header('location: Accountinfo.php');
 
 elseif ($_POST['Surname']) {
     $prenom = $_POST['Surname'];
-$ModifyAccountInfoSQL = $db->prepare('UPDATE users_new SET prenom = :prenom WHERE id_user = :id_user');
+$ModifyAccountInfoSQL = $db->prepare('UPDATE users SET prenom = :prenom WHERE id_user = :id_user');
 $ModifyAccountInfoSQL->bindParam(':id_user', $_SESSION['user_id']);
 $ModifyAccountInfoSQL->bindParam(':prenom', $prenom);
 $ModifyAccountInfoSQL->execute();
@@ -35,7 +35,7 @@ header('location: Accountinfo.php');
 
 elseif ($_POST['UserName']) {
     $username = $_POST['UserName'];
-    $ModifyAccountInfoSQL = $db->prepare('UPDATE users_new SET username = :username WHERE id_user = :id_user');
+    $ModifyAccountInfoSQL = $db->prepare('UPDATE users SET username = :username WHERE id_user = :id_user');
     $ModifyAccountInfoSQL->bindParam(':username', $username);
     $ModifyAccountInfoSQL->bindParam(':id_user', $_SESSION['user_id']);
 $ModifyAccountInfoSQL->execute();
@@ -45,7 +45,7 @@ header('location: Accountinfo.php');
     }
 elseif ($_POST['Password']) {
     $password = $_POST['Password'];
-    $ModifyAccountInfoSQL = $db->prepare('UPDATE users_new SET password = :password WHERE id_user = :id_user');
+    $ModifyAccountInfoSQL = $db->prepare('UPDATE users SET password = :password WHERE id_user = :id_user');
     $ModifyAccountInfoSQL->bindParam(':id_user', $_SESSION['user_id']);
     $ModifyAccountInfoSQL->bindParam(':password', $password);
 $ModifyAccountInfoSQL->execute();
@@ -55,7 +55,7 @@ header('location: Accountinfo.php');
     }
 elseif ($_POST['SecretQuestion']) {
     $secretquestion = $_POST['SecretQuestion'];
-    $ModifyAccountInfoSQL = $db->prepare('UPDATE users_new SET question = :question WHERE id_user = :id_user');
+    $ModifyAccountInfoSQL = $db->prepare('UPDATE users SET question = :question WHERE id_user = :id_user');
     $ModifyAccountInfoSQL->bindParam(':id_user', $_SESSION['user_id']);
     $ModifyAccountInfoSQL->bindParam(':question', $secretquestion);
 $ModifyAccountInfoSQL->execute();
@@ -65,7 +65,7 @@ header('location: Accountinfo.php');
     }
 elseif ($_POST['SecretAnswer']) {
     $secretanswer = $_POST['SecretAnswer'];
-    $ModifyAccountInfoSQL = $db->prepare('UPDATE users_new SET reponse = :reponse WHERE id_user = :id_user');
+    $ModifyAccountInfoSQL = $db->prepare('UPDATE users SET reponse = :reponse WHERE id_user = :id_user');
     $ModifyAccountInfoSQL->bindParam(':id_user', $_SESSION['user_id']);
     $ModifyAccountInfoSQL->bindParam(':reponse', $secretanswer);
 $ModifyAccountInfoSQL->execute();

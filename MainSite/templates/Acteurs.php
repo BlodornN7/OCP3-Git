@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
 }
 
 // Sinon si une requète de type POST contenant le terme 'dislike' est reçue alors ...
-elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['dislike'])) {
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['dislike']))) {
 $acteurid = $_POST['id_acteur'];
 $dislike = $_POST['dislike'];
 $userid = $_SESSION['user_id'];
@@ -99,7 +99,7 @@ $SQLQueryDislike->execute();
 } 
 }
 // Fait la liaison entre la table user et vote et en fait un tableau
-$SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN post ON users_new.id_user=post.id_user WHERE id_acteur = :id_acteur ORDER BY date_add DESC' ;
+$SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post ON users.id_user=post.id_user WHERE id_acteur = :id_acteur ORDER BY date_add DESC' ;
 	    $testliaisontable = $db->prepare($SqlQuery1);
 	    $testliaisontable->bindParam(':id_acteur', $Acteurs['id_acteur']);
 	    $testliaisontable->execute();
@@ -125,7 +125,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="styleacteur.css">
+	<link rel="stylesheet" type="text/css" href="CSS/styleacteur.css">
 </head>
 
 <body>

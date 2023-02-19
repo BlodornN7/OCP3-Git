@@ -4,7 +4,7 @@
   <head>
     <title>Page d'inscription</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="connexion.css">
+	<link rel="stylesheet" type="text/css" href="CSS/connexion.css">
   </head>
   <body>
 

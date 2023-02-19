@@ -4,7 +4,7 @@
   <head>
     <title>Nouveau mot de passe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="connexion.css">
+	<link rel="stylesheet" type="text/css" href="CSS/connexion.css">
   </head>
   <body>
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']))  {
     
 
 // Demande à db de mettre à jour le mot de passe de l'utilisateur
-$UpdateUserPasswordSQL = $db->prepare('UPDATE users_new SET password = :password WHERE username = :username');
+$UpdateUserPasswordSQL = $db->prepare('UPDATE users SET password = :password WHERE username = :username');
 $UpdateUserPasswordSQL->bindParam(':username', $username);
 $UpdateUserPasswordSQL->bindParam(':password', $newpassword);
 $UpdateUserPasswordSQL->execute();

@@ -4,7 +4,7 @@
   <head>
     <title>Récupération du mot de passe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="connexion.css">
+	<link rel="stylesheet" type="text/css" href="CSS/connexion.css">
   </head>
   <body>
 
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')   {
     $username = $_POST['username'];
     $SecretAnswer = $_POST['SecretAnswer'];
 
-$CheckUsernameAndSecretAnswerSQL = $db->prepare('SELECT * FROM users_new WHERE username = :username AND reponse = :reponse');
+$CheckUsernameAndSecretAnswerSQL = $db->prepare('SELECT * FROM users WHERE username = :username AND reponse = :reponse');
 $CheckUsernameAndSecretAnswerSQL->bindParam(':username', $username);
 $CheckUsernameAndSecretAnswerSQL->bindParam(':reponse', $SecretAnswer);
 $CheckUsernameAndSecretAnswerSQL->execute();

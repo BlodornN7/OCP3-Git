@@ -7,7 +7,7 @@ if ($_SESSION['logged_in'] !== true) {
   <head>
     <title>Page d'information du compte</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="CSS/style.css">
   </head>
   <body>
 

@@ -4,7 +4,7 @@
   <head>
     <title>Page de connexion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="connexion.css">
+	<link rel="stylesheet" type="text/css" href="CSS/connexion.css">
   </head>
   <body>
 
@@ -25,7 +25,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 
-$CheckUsernameAndPassWordSQL = $db->prepare('SELECT * FROM users_new WHERE username = :username AND password = :password');
+$CheckUsernameAndPassWordSQL = $db->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
 $CheckUsernameAndPassWordSQL->bindParam(':username', $username);
 $CheckUsernameAndPassWordSQL->bindParam(':password', $password);
 $CheckUsernameAndPassWordSQL->execute();

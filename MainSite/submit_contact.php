@@ -17,14 +17,14 @@ $password = $_POST['Password'];
 $secretquestion = $_POST['SecretQuestion'];
 $secretanswer = $_POST['SecretAnswer'];
 //
-$CheckUsernameAvailableSQL = 'SELECT * FROM users_new WHERE username = $username ';
-$CheckFullNameAvailableSQL = 'SELECT * FROM users_new WHERE username = $fullname ';
+$CheckUsernameAvailableSQL = 'SELECT * FROM users WHERE username = $username ';
+$CheckFullNameAvailableSQL = 'SELECT * FROM users WHERE username = $fullname ';
 
 
 
 
 //Demande à l'utilisateur si le nom d'utilisateur est déjà utilisé
-$CheckUsernameAvailableSQL = $db->prepare("SELECT * FROM users_new WHERE username = :username");
+$CheckUsernameAvailableSQL = $db->prepare("SELECT * FROM users WHERE username = :username");
 $CheckUsernameAvailableSQL->bindParam(':username', $username);
 $CheckUsernameAvailableSQL->execute();
 $user1 = $CheckUsernameAvailableSQL->fetch();
@@ -39,7 +39,7 @@ else {
     
 
 //Ecriture de la requête
-$sqlQuery = 'INSERT INTO users_new(nom, prenom, username, password, question, reponse) VALUES (:nom, :prenom, :username, :password, :question, :reponse)';
+$sqlQuery = 'INSERT INTO users(nom, prenom, username, password, question, reponse) VALUES (:nom, :prenom, :username, :password, :question, :reponse)';
 //Préparation
 $insertUser = $db->prepare($sqlQuery);
 // Execution
