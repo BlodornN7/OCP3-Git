@@ -94,6 +94,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="styleacteur.css">
+	<title><?=$Acteurs['Acteur'];?></title>
 </head>
 
 <body>

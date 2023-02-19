@@ -14,23 +14,28 @@
 
 <main>
 	
-<div class="h1">
+<div id="titre">
 
-    <h1 id="presentation_text">Le GBAF (Groupement Banque Assurance Français) est une fédération qui représente les six plus grandes banques et assurances françaises :
-		 BNP Paribas, BPCE, Crédit Agricole, Crédit Mutuel-CIC, Société Générale, et La Banque Postale. 
-		 Le GBAF a pour mission de promouvoir l'industrie bancaire et d'assurance en France et de jouer un rôle de représentant de la profession 
-		 auprès des autorités publiques en matière de réglementation financière. Le GBAF gère près de 80 millions de comptes dans le pays.</h1>
-    <div id="illustrationbox">
-    <img id="illustration" src="images/illustration_bank.jpg">
-    </div>
+	<h1> Qu'est-ce que le GBAF ?</h1>
+
+    <p>Le GBAF est le représentant de la profession bancaire et des assureurs sur tous
+		les axes de la réglementation financière française. <br> Sa mission est de promouvoir
+		l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des
+		pouvoirs publics.
+	</p>
+   
+   <!-- <div id="illustrationbox">
+    <img id="illustration" src="images/logo.png">
+    </div> -->
     
-
 </div>
+
 
 
 <div> 
 
-	<h2>Vous trouverez ci-dessous la liste des acteurs partenaires du GBAF</h2>
+	<h2>Texte acteurs & partenaires</h2>
+	<p>Présentation lorem ipsum dksjfdlfskfhjdsklfhsjfdklshjdskfshdjk</p>
 
 </div>
 
@@ -46,9 +51,10 @@
               $texte_coupe = substr($paragraphe, 0, $longueur); ?> 
 
 		<div class="frame">
-		    <img class="image" src="<?=$Acteurs['logo'];?>">
-			
-			
+
+		
+			 <img class="image" src="<?=$Acteurs['logo'];?>">
+			 <h3> <?=$Acteurs['acteur'];?></h3>
 			 <p><?= $texte_coupe . "..."; ?></p>
 			 
 			 

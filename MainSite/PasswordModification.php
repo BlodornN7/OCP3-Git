@@ -38,22 +38,30 @@ header('location: login.php');
 }
 else { ?>
 
-<section id="Connexionsection">
+<section>
+
+    <div class="formulaire"> 
+
 <h1>Modification du mot de passe</h1>
 
-<form method="POST">
-	<label for="username">Nom d'utilisateur:</label><br>
-	<input type="text" id="username" name="username"><br>
-    <label for="NewPassword">Nouveau mot de passe</label><br>
-    <input type="password" id="NewPassword" name="NewPassword"><br><br>
-    <input type="submit" value="Modifier le mot de passe"> </form>
-</section> <?php ;} ?>
+        <form method="POST">
+        	<input type="text" id="username" name="username" placeholder="Nom d'utilisateur"><br>
+            <input type="password" id="NewPassword" name="NewPassword" placeholder="Nouveau mot de passe"><br><br>
+            <button type="submit" value="Modifier le mot de passe"><strong>Modifier le mot de passe</strong></button>
+        </form>
+    
+        </br> 
+
+    </div>
+
+</section> 
 
 
+<?php 
 
+    ;} 
 
-
-
+?>
 
  <?php include_once('footer.php'); ?>
 

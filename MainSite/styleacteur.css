@@ -1,7 +1,7 @@
 #navbox {
 	display: flex;
-    flex-direction: column;
     align-items: flex-end;
+    flex-direction: column-reverse;
 }
 
 #mainlogo {
@@ -149,6 +149,8 @@ header img {
 
 header {
 	text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 #navbox {

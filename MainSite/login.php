@@ -45,22 +45,35 @@ if ($user3["username"] === $username && $user3["password"] === $password) {
     header ('location: index.php');
         
 }
-else {echo '<section id="Connexionsection">Identifiants incorrects<br> <a href="login.php">Revenir à la page de connexion</section>';}}
+else {echo '
+
+            <section id="incorrect">
+
+            <div class="formulaire">
+
+                Identifiants incorrects
+                <br> 
+                <a href="login.php">Revenir à la page de connexion</a>
+            </div>
+
+            </section>
 
 
-else { echo ' <section id="Connexionsection">   
-	<h1>Page de connexion</h1>
-    <form method="POST">
-      <label for="username">Nom d\'utilisateur:</label><br>
-      <input type="text" id="username" name="username"><br>
-      <label for="password">Mot de passe:</label><br>
-      <input type="password" id="password" name="password"><br><br>
-      <input type="submit" value="Se connecter"> </form><br>
-      <button><a href="Passwordreset.php">Mot de passe oublié</button>
-      
-      
-    </form>
-    </div> 
+';}}
+
+
+else { echo ' 
+
+<section> 
+    <form class="formulaire" method="POST">
+          <h1>Connectez-vous</h1>
+          
+          <input type="text" id="username" name="username" placeholder="Nom d\'utilisateur"><br>
+          <input type="password" id="password" name="password" placeholder="Mot de passe"><br><br>
+          <button type="submit" value="Se connecter"> <strong> connexion </strong> </button><br>
+          <p>Pas encore inscrit ? <a href="Pageinscription.php">Créez votre compte</a> </br> Mot de passe oublié ? <a href="Passwordreset.php">Cliquez ici</a> </p>
+
+    </form> 
 </section>';
  } ?> 
 </body>

@@ -11,28 +11,23 @@
        <?php include_once('header.php'); ?>
 
 <section>
- <div id="Connexionsection">    
+ <div id="formulaire_inscription"> 
+
 	<h1>Page d'inscription</h1>
+
     <form action="submit_contact.php" method="POST">
-      <label for="Name">Nom</label><br>
-      <input type="text" id="Name" name="Name"><br>
-      <label for="Surname">Prénom</label><br>
-      <input type="text" id="Surname" name="Surname"><br>
-      <label for="UserName">Nom d'utilisateur</label><br>
-      <input type="text" id="UserName" name="UserName"><br>
-      <label for="Password">Mot de passe</label><br>
-      <input type="password" id="Password" name="Password"><br>
-      <label for="SecretQuestion">Question secrète</label><br>
-      <input type="text" id="SecretQuestion" name="SecretQuestion"><br>
-      <label for="SecretAnswer">Réponse à la question secrète</label><br>
-      <input type="text" id="SecretAnswer" name="SecretAnswer"><br><br>
-      <input type="submit" value="Inscription"><br>
+          <input type="text" id="Name" name="Name" placeholder="Nom"><br>
+          <input type="text" id="Surname" name="Surname" placeholder="Prénom"><br>
+          <input type="text" id="UserName" name="UserName" placeholder="Nom d'utilisateur"><br>
+          <input type="password" id="Password" name="Password" placeholder="Mot de passe"><br>
+          <input type="text" id="SecretQuestion" name="SecretQuestion" placeholder="Question secrète"><br>
+          <input type="text" id="SecretAnswer" name="SecretAnswer" placeholder="Réponse à la question secrète"><br><br>
+          <button type="submit" value="Inscription"><strong>Inscription</strong><br>
     </form>
-    </div> 
+
+ </div> 
 </section>
-
-
-   <?php include_once('footer.php'); ?>
   </body>
 </html>
 
+<?php include_once('footer.php'); ?>

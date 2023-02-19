@@ -40,22 +40,22 @@ $user = $CheckUsernameAndSecretAnswerSQL->fetch();
 
 else { include_once('header.php'); ?>
     
-    <section id="Connexionsection">
+    <section>
+         <div id="formulaire_inscription"> 
 <h1 style="text-align: center;">Mot de passe oublié</h1>
 
 <form action="Passwordreset.php" method="POST">
-	<label for="username">Nom d'utilisateur:</label><br>
-	<input type="text" id="username" name="username" ><br>
-	<label for="SecretAnswer">Réponse à la question secrète:</label><br>
-	<input type="text" id="SecretAnswer" name="SecretAnswer"><br>
-	<input type="submit" value="Modifier le mot de passe"></form>
+	<input type="text" id="username" name="username" placeholder="Nom d'utilisateur"><br>
+	<input type="text" id="SecretAnswer" name="SecretAnswer" placeholder="Réponse à la question secrète"><br>
+	<button type="submit" value="Modifier le mot de passe"><strong>Modifier le mot de passe</strong></form>
+</div>
        
 </section>
+
+
 <?php include_once('footer.php');
 
  }
-
-
 
 
 ?>
