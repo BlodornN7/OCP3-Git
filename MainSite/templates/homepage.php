@@ -34,8 +34,8 @@
 
 <div> 
 
-	<h2>Texte acteurs & partenaires</h2>
-	<p>Présentation lorem ipsum dksjfdlfskfhjdsklfhsjfdklshjdskfshdjk</p>
+	<h2>Nos partenaires</h2>
+	
 
 </div>
 

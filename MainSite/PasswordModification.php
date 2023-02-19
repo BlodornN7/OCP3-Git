@@ -4,7 +4,7 @@
   <head>
     <title>Nouveau mot de passe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="connexion.css">
   </head>
   <body>
 
@@ -45,7 +45,7 @@ else { ?>
 <h1>Modification du mot de passe</h1>
 
         <form method="POST">
-        	<input type="text" id="username" name="username" placeholder="Nom d'utilisateur"><br>
+        	<input type="text" id="username" name="username" placeholder="Confirmez votre nom d'utilisateur"><br>
             <input type="password" id="NewPassword" name="NewPassword" placeholder="Nouveau mot de passe"><br><br>
             <button type="submit" value="Modifier le mot de passe"><strong>Modifier le mot de passe</strong></button>
         </form>

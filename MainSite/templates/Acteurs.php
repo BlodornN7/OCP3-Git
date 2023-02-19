@@ -5,66 +5,98 @@
 
 
 
- // Si une requète de type POST contenant le terme 'like' est reçue alors ...	
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['like']))  {
+ // Si une requête de type POST contenant le terme 'like' est reçue alors ...	
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
+    $acteurid = $_POST['id_acteur'];
+    $like = $_POST['like'];
+    $userid = $_SESSION['user_id'];
+    //Selectionne l'éventuelle entrée du like si elle existe
+    $checklike = $db->prepare('SELECT vote FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur'); 
+    $checklike->bindParam(':id_user', $_SESSION['user_id']);
+    $checklike->bindParam(':id_acteur', $acteurid);
+    $checklike->execute();
+    $row = $checklike->fetch(PDO::FETCH_NUM);
+
+    // Si dans le tableau il y a une entrée "1" alors supprime le like qui est = à 1
+    
+    if (in_array(1, $row)) {
+        $SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
+        $SQLQueryDeleteLike->bindParam(':id_user', $userid);
+        $SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
+        $SQLQueryDeleteLike->execute();
+    } 
+	//Sinon si dans le tableau il y a une entrée "-1" alors supprime le diskile qui est = à -1 et ajoute un like qui est = à 1
+
+	elseif (in_array(-1, $row)) {
+		$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
+        $SQLQueryDeleteLike->bindParam(':id_user', $userid);
+        $SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
+        $SQLQueryDeleteLike->execute();
+
+		$SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
+        $SQLQueryLike->bindParam(':id_user', $userid);
+        $SQLQueryLike->bindParam(':id_acteur', $acteurid);
+        $SQLQueryLike->bindParam(':vote', $like);
+        $SQLQueryLike->execute();
 
 
 
-$acteurid = $_POST['id_acteur'];
-$like = $_POST['like'];
-$userid = $_SESSION['user_id'];
-//Selectionne l'éventuelle entrée du like si il existe
-$checklike = $db->prepare('SELECT item_id FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur'); 
-$checklike->bindParam(':id_user', $_SESSION['user_id']);
-$checklike->bindParam(':id_acteur', $acteurid);
-$checklike->execute();
-
-
-// Si le total des valeurs est égal à 1, alors supprime le like qui équivaut à 1
-if ($checklike->rowCount() == 1) {
-$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
-$SQLQueryDeleteLike->bindParam(':id_user', $userid);
-$SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
-$SQLQueryDeleteLike->execute(); } 
-
-
-//Sinon ajoute un like/1 
-else {
-	$SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
-$SQLQueryLike->bindParam(':id_user', $userid);
-$SQLQueryLike->bindParam(':id_acteur', $acteurid);
-$SQLQueryLike->bindParam(':vote', $like);
-$SQLQueryLike->execute();
+	}
+    //Sinon ajoute un like/1 
+    else {
+        $SQLQueryLike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
+        $SQLQueryLike->bindParam(':id_user', $userid);
+        $SQLQueryLike->bindParam(':id_acteur', $acteurid);
+        $SQLQueryLike->bindParam(':vote', $like);
+        $SQLQueryLike->execute();
+    }
 }
-}
+
 // Sinon si une requète de type POST contenant le terme 'dislike' est reçue alors ...
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['dislike'])) {
 $acteurid = $_POST['id_acteur'];
 $dislike = $_POST['dislike'];
 $userid = $_SESSION['user_id'];
 
-// Selectionne l'éventuelle entrée du dislike si il existe
-$checkdislike = $db->prepare('SELECT item_id FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur'); 
+//Selectionne l'éventuelle entrée du dislike si elle existe
+$checkdislike = $db->prepare('SELECT vote FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur'); 
 $checkdislike->bindParam(':id_user', $_SESSION['user_id']);
 $checkdislike->bindParam(':id_acteur', $acteurid);
 $checkdislike->execute();
-//Si il ne trouve pas de dislike de l'utilisateur alors ajoute en un
-if ($checkdislike->rowCount() == 0) {
-	$SQLQueryDislike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
+$row = $checkdislike->fetch(PDO::FETCH_NUM);
+
+//Si dans le tableau il y a une entrée "-1" alors supprime le dislike qui est = à -1
+if (in_array(-1, $row)) {
+	$SQLQueryDeleteDislike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
+	$SQLQueryDeleteDislike->bindParam(':id_user', $userid);
+	$SQLQueryDeleteDislike->bindParam(':id_acteur', $acteurid);
+	$SQLQueryDeleteDislike->execute();
+}
+
+//Sinon si dans le tableau il y a une entrée "1" alors supprime le like qui est = à 1 et ajoute un dislike qui est = à -1
+elseif (in_array(1, $row)) {
+	$SQLQueryDeleteDislike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
+	$SQLQueryDeleteDislike->bindParam(':id_user', $userid);
+	$SQLQueryDeleteDislike->bindParam(':id_acteur', $acteurid);
+	$SQLQueryDeleteDislike->execute();
+
+$SQLQueryDislike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
 $SQLQueryDislike->bindParam(':id_user', $userid);
 $SQLQueryDislike->bindParam(':id_acteur', $acteurid);
 $SQLQueryDislike->bindParam(':vote', $dislike);
 $SQLQueryDislike->execute();
 }
-// Sinon supprime le dislike OU le like déjà présent
+// Sinon ajoute un dislike/-1
 else {
 
 
 
-$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
-	$SQLQueryDeleteLike->bindParam(':id_user', $userid);
-	$SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
-	$SQLQueryDeleteLike->execute(); } 
+$SQLQueryDislike = $db->prepare('INSERT INTO vote SET id_user = :id_user, id_acteur = :id_acteur, vote = :vote');
+$SQLQueryDislike->bindParam(':id_user', $userid);
+$SQLQueryDislike->bindParam(':id_acteur', $acteurid);
+$SQLQueryDislike->bindParam(':vote', $dislike);
+$SQLQueryDislike->execute();
+} 
 }
 // Fait la liaison entre la table user et vote et en fait un tableau
 $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN post ON users_new.id_user=post.id_user WHERE id_acteur = :id_acteur ORDER BY date_add DESC' ;
@@ -94,7 +126,6 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users_new INNER JOIN 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="styleacteur.css">
-	<title><?=$Acteurs['Acteur'];?></title>
 </head>
 
 <body>
