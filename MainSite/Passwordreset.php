@@ -1,3 +1,4 @@
+<?php error_reporting(0); //ignore les erreurs non pertinentes ?>
 <!DOCTYPE html>
 
 <html>
@@ -34,7 +35,16 @@ $user = $CheckUsernameAndSecretAnswerSQL->fetch();
     header('location: PasswordModification.php');
     }
     
-    else {echo 'Identifiants incorrects';}
+    else {echo '<section id="incorrect">
+
+        <div class="formulaire">
+
+            Identifiants incorrects
+            <br> 
+            <a href="Passwordreset.php">Revenir à la page</a>
+        </div>
+
+        </section>';}
 }
 
 
