@@ -125,7 +125,8 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="CSS/styleacteur.css">
+	<link rel="stylesheet" type="text/css" href="CSS/styleacteur.css" >
+	<title>Page Acteur de <?=$Acteurs['acteur'];?></title>
 </head>
 
 <body>
@@ -136,7 +137,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 <section id="sectionacteur1">
 
 	<div class="logoacteurdiv" >
-	<img class="image" src="<?=$Acteurs['logo'];?>">
+	<img class="image" src="<?=$Acteurs['logo'];?>" alt="Logo de <?=$Acteurs['Acteur'];?>">
 	</div> <br>
 	<h1>Présentation de l'acteur </h1>
 	<hr> <br>

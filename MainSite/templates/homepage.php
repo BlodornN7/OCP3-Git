@@ -6,6 +6,7 @@
 <head>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	  <title>Accueil</title>
 </head>
 
 <body>
@@ -51,7 +52,7 @@
 		<div class="frame">
 
 		
-			 <img class="image" src="<?=$Acteurs['logo'];?>">
+			 <img class="image" src="<?=$Acteurs['logo'];?>" alt="Logo de <?=$Acteurs['Acteur'];?>">
 			 <h3> <?=$Acteurs['acteur'];?></h3>
 			 <p><?= $texte_coupe . "..."; ?></p>
 			 

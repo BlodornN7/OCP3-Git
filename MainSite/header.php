@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_ACTIVE) {
     <p><a href="Accountinfo.php"><?=$_SESSION['surname'];?> <?=$_SESSION['name'];?></a></p>
   </nav>	
   <div id="image">
-    <a href="index.php"><img src="images/logo.png" alt="Logo de l\'entreprise"></a>
+    <a href="index.php"><img src="images/logo.png" alt="Logo de la GBAF"></a>
   </div> 
 </header>
 <?php
