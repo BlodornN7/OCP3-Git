@@ -20,16 +20,20 @@ $secretanswer = $_POST['SecretAnswer'];
 $CheckUsernameAvailableSQL = 'SELECT * FROM users WHERE username = $username ';
 $CheckFullNameAvailableSQL = 'SELECT * FROM users WHERE username = $fullname ';
 
-
-
-
 //Demande à l'utilisateur si le nom d'utilisateur est déjà utilisé
 $CheckUsernameAvailableSQL = $db->prepare("SELECT * FROM users WHERE username = :username");
 $CheckUsernameAvailableSQL->bindParam(':username', $username);
 $CheckUsernameAvailableSQL->execute();
 $user1 = $CheckUsernameAvailableSQL->fetch();
 
-if ($user1) {
+if (empty($name) || empty($surname) || empty($username) || empty($password) || empty($secretquestion) || empty($secretanswer)) {
+    echo "Un des champs est vide, merci de bien vouloir vérifier vos informations";
+    exit();
+}
+
+
+
+elseif ($user1) {
     echo "Le nom d'utilisateur n'est pas disponible";
     exit(); // ce code stoppe le script
 } 

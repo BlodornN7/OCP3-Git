@@ -1,5 +1,5 @@
 
-
+<?php error_reporting(0); //ignore les erreurs non pertinentes ?>
 
 <!DOCTYPE html>
 <html>
@@ -24,9 +24,7 @@
 		pouvoirs publics.
 	</p>
    
-   <!-- <div id="illustrationbox">
-    <img id="illustration" src="images/logo.png">
-    </div> -->
+ 
     
 </div>
 

@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     $checklike->bindParam(':id_user', $_SESSION['user_id']);
     $checklike->bindParam(':id_acteur', $acteurid);
     $checklike->execute();
-    $row = $checklike->fetch(PDO::FETCH_NUM);
+    $row = $checklike->fetch();
 
     // Si dans le tableau il y a une entrée "1" alors supprime le like qui est = à 1
     
-    if (in_array(1, $row)) {
+    if ($row['vote'] == 'J\'aime') {
         $SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
         $SQLQueryDeleteLike->bindParam(':id_user', $userid);
         $SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     } 
 	//Sinon si dans le tableau il y a une entrée "-1" alors supprime le diskile qui est = à -1 et ajoute un like qui est = à 1
 
-	elseif (in_array(-1, $row)) {
+	elseif ($row['vote'] == 'Je n\'aime pas') {
 		$SQLQueryDeleteLike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
         $SQLQueryDeleteLike->bindParam(':id_user', $userid);
         $SQLQueryDeleteLike->bindParam(':id_acteur', $acteurid);
@@ -63,10 +63,10 @@ $checkdislike = $db->prepare('SELECT vote FROM vote WHERE id_user = :id_user AND
 $checkdislike->bindParam(':id_user', $_SESSION['user_id']);
 $checkdislike->bindParam(':id_acteur', $acteurid);
 $checkdislike->execute();
-$row = $checkdislike->fetch(PDO::FETCH_NUM);
+$row = $checkdislike->fetch();
 
 //Si dans le tableau il y a une entrée "-1" alors supprime le dislike qui est = à -1
-if (in_array(-1, $row)) {
+if ($row['vote'] == 'Je n\'aime pas') {
 	$SQLQueryDeleteDislike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
 	$SQLQueryDeleteDislike->bindParam(':id_user', $userid);
 	$SQLQueryDeleteDislike->bindParam(':id_acteur', $acteurid);
@@ -74,7 +74,7 @@ if (in_array(-1, $row)) {
 }
 
 //Sinon si dans le tableau il y a une entrée "1" alors supprime le like qui est = à 1 et ajoute un dislike qui est = à -1
-elseif (in_array(1, $row)) {
+elseif ($row['vote'] == 'J\'aime') {
 	$SQLQueryDeleteDislike = $db->prepare('DELETE FROM vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
 	$SQLQueryDeleteDislike->bindParam(':id_user', $userid);
 	$SQLQueryDeleteDislike->bindParam(':id_acteur', $acteurid);
@@ -106,13 +106,13 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 	    $result = $testliaisontable->FetchAll();
 
 		$idacteur = $Acteurs['id_acteur'];
-		$getlikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = 1');
+		$getlikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = "j\'aime"');
 		$getlikesum->bindParam(':id_acteur', $idacteur);
 		$getlikesum->execute();
 		$resultlike = $getlikesum->FetchAll();
 	   
 		
-		$getdislikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = -1');
+		$getdislikesum = $db->prepare('SELECT COUNT(vote) AS total_rows FROM vote WHERE id_acteur = :id_acteur AND vote = "je n\'aime pas"');
 		$getdislikesum->bindParam(':id_acteur', $idacteur);
 		$getdislikesum->execute();
 		$resultdislike = $getdislikesum->FetchAll();
@@ -134,19 +134,20 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 
 
 <section id="sectionacteur1">
+
 	<div class="logoacteurdiv" >
 	<img class="image" src="<?=$Acteurs['logo'];?>">
-	</div> <br></br>
-<b> <?= $Acteurs['description']; ?> </b>
-
-
+	</div> <br>
+	<h1>Présentation de l'acteur </h1>
+	<hr> <br>
+	<?= $Acteurs['description']; ?> 
+	<br><br>
+	Pour en savoir plus, <b><a href="#">rendez-vous sur le site de <?=$Acteurs['acteur'];?> ></a></b>
 
 </section>
 
 
 <section id="commentaire">
-
-	<h3> Commentaires </h3>
 
 	
 
@@ -170,7 +171,7 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 		'id_acteur' => $acteur_id,
 		'date_add' => $date,
 		]);
-		Echo 'Merci, '.$_SESSION["surname"].'. Votre commentaire a bien été ajouté.';
+		Echo '<b>Merci, '.$_SESSION["surname"].'. Votre commentaire a bien été ajouté.</b>';
 		header("Refresh:2");
 			
 	}
@@ -185,18 +186,19 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 		</div>
 	   <?php //Prends le nombre de like/dislike et en fait un total puis l'affiche
 		if($resultlike[0]['total_rows'] == 0 && $resultdislike[0]['total_rows'] == 0) { ?>
-		  <p id="LikeNonePrompt"> Il n'y aucun like ou dislike sur cet acteur </p>
+		  <p id="LikeNonePrompt"> <i>Il n'y aucun like ou dislike sur cet acteur pour le moment. </i></p>
 		<?php }
 		 else {
 		echo '<p id="LikeDislikePrompt">'.$resultlike[0]['total_rows'].' personnes ont recommandé cet acteur et '.$resultdislike[0]['total_rows'].' personnes ne le recommande pas</p>'; 
 		} ?>
 
 <form id="LikeDislikePost" method="post">
- <input type="hidden" name="id_acteur" value="<?=$Acteurs['id_acteur'];?>"><br><br>
- <input type="submit" name="like" value="1">
- <input type="submit" name="dislike" value="-1">
+ <input type="hidden" name="id_acteur" value="<?=$Acteurs['id_acteur'];?>">
+ <input type="submit" name="like" value="J'aime">
+ <input type="submit" name="dislike" value="Je n'aime pas">
 </form>
 
+<h1> Commentaires </h1>
 
 	<?php // Si l'utilisateur clique sur le bouton, alors il affiche le champs pour remplir son commentaire et le soumettre 
 	    if(isset($_POST['show-form-button']))
@@ -221,9 +223,9 @@ $SqlQuery1 = 'SELECT prenom, post.post, post.date_add FROM users INNER JOIN post
 
 	    foreach ($result as $test) { ?>
 		<div class="CommentSection">
-	<p> Auteur : <?= $test['prenom']; ?> </p>
-	<p> Date : <?= $test['date_add']; ?> </p>
-	<p> Commentaire : <?= $test['post']; ?> </p>
+	<p> <b style="color : #FF0000;"> Auteur : <?= $test['prenom']; ?> </b> <br>
+	 <?= $test['date_add']; ?> </p>
+	<p> <i> <?= $test['post']; ?> </i></p>
 	
 	</div>
 	<?php } ?>

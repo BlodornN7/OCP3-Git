@@ -10,7 +10,7 @@ body {
 	position : relative;
 	margin:0;
   padding-bottom: 300px;
-  height:100%;
+  /* height:100%; */
 	background-color : #F2F2F2;
 	font-family: 'Poppins', sans-serif;
 }
@@ -37,11 +37,10 @@ header {
 }
 
 #footer {
-
-	 position:absolute;
-   bottom:0;
+  position : absolute;
+	 bottom:0;
    left: 0; 
-   right: 0
+   right: 0;
 }
 
 
@@ -52,6 +51,64 @@ header {
 .formulaire p {
 	font-size : 12px;
 }
+
+#informations {
+  position : relative;
+  background: #FFFFFF;
+  max-width: 560px;
+  min-height : 850px;
+  text-align: center;
+  margin: 0 auto 10px;
+  padding: 45px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#informations a {
+  color: #FF0000;
+}
+
+#informations input {
+
+font-family: 'Poppins', sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  margin: 0 0 15px;
+  padding: 15px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 14px;
+   }
+
+
+#informations button {
+
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  font-weight : bold;
+  background : #bfbfbf;
+  height : 30px;
+  margin: 0 auto;
+  padding : 0 20px;
+  border: 0;
+  color: black;
+  font-size: 12px;
+  text-align: center;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+
+}
+
+#informations button:hover,#informations button:active,#informations button:focus {
+
+  background: #cecece ;
+}
+
+
+/*STYLE POUR LE HEADER*/
 
 #navbox {
   position: relative;
@@ -84,7 +141,6 @@ header {
 .h3link {
 
 	text-align: center;
-	/*border: solid;*/
 	margin-left: 50px;
 	margin-right: 50px;
 	position : relative;
@@ -127,9 +183,9 @@ color: #FF0000;
 .frame p {
 
 	text-align: left;
-	word-break: break-all;
+  word-break: break-word;
   position: relative;
-  margin-left: 110px;
+  margin-left: 62px;
 }
 
 
@@ -143,10 +199,10 @@ color: #FF0000;
 }
 
  h3 {
-	word-break: break-all;
-	position: relative;
-  padding: 10px;
-  left: 100px;
+	word-break: break-word;
+    position: relative;
+    padding: 10px;
+    left: 51px;
 
 
 }
@@ -225,8 +281,9 @@ font-family: 'Poppins', sans-serif;
 }
 
 .frame img {
-	width : 200px;
-
+	width: 200px;
+  margin-left: 62px;
+  margin-top: 50px;
 	
 }
 
@@ -276,7 +333,7 @@ max-width: 200px;
 	text-align: center;
 }
 
-@media screen and (max-width: 435px) {
+@media screen and (max-width: 412px) {
 
 header img {
     width: 100%;
@@ -289,7 +346,7 @@ header img {
     align-items: stretch;
     position: relative;
     top: 129px;
-    padding-right: 43px;
+    padding-right: 34px;
 }
 
 #mainlogo {
@@ -307,7 +364,7 @@ header {
 }
 
 h3 {
-	word-break: break-all;
+	word-break: break-word;
   padding: 10px;
   position: unset;
   text-align: center;
@@ -315,16 +372,18 @@ h3 {
 }
 
 .frame p {
-  word-break: break-all;
+  word-break: break-word;
   text-align: left;
   position: relative;
   margin-left: 0px;
-  width : 200px;
+  
 }
 
 .frame img {
 	width: 100%;
 	height: unset;
+  margin-left: unset;
+  margin-top: unset;
 }
 
 #image {
@@ -333,9 +392,7 @@ h3 {
   left: 8px;
 }
 
-.frame p {
-  left: 41px;
-}}
+}
 
 
 
